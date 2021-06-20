@@ -1,0 +1,104 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Learning Vue</title>
+    <script src="https://unpkg.com/vue@3.0.2"></script>
+
+    <style>
+      .box {
+        padding: 100px 0;
+        width: 400px;
+        text-align: center;
+        background: coral;
+        margin: 20px;
+        display: inline-block;
+      }
+
+      body {
+        background: #eee;
+        max-width: 960px;
+        margin: 20px auto;
+      }
+      p,
+      h3,
+      h2,
+      ul {
+        margin: 0;
+        padding: 0;
+      }
+      li {
+        list-style-type: none;
+        background: #fff;
+        margin: 20px auto;
+        padding: 10px 20px;
+        border-radius: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      li.fav {
+        background: #3c5a54;
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>This is vue Js learning curve</h1>
+    <div id="app">
+      <p>Hi This is {{name}}</p>
+      <p>I am an {{designation}}</p>
+      <div v-if="showSalary">
+        <h3>Using V-if</h3>
+        <p>Current CTC {{salary}}</p>
+        <button v-on:click="salary = salary + 50000">Increase</button>
+        <button v-on:click="salary--">Decrease</button>
+        <button @click="resetSalary()">Reset</button>
+      </div>
+      <br />
+      <br />
+      <div v-show="showSalary">
+        <h3>Using V-show</h3>
+        <p>Current CTC {{salary}}</p>
+        <button v-on:click="salary = salary + 50000">Increase</button>
+        <button v-on:click="salary--">Decrease</button>
+        <button @click="resetSalary()">Reset</button>
+      </div>
+      <button @click="toggleSalaryView">
+        <span v-if="showSalary">Hide Salary</span>
+        <span v-else>Show Salary</span>
+      </button>
+      <div @click="changeDesignation('Developer')">Changing designation</div>
+      <div @click="resetDesignation()">Reset designation</div>
+      <!-- mouse events -->
+      <div class="box" @mouseover="handleEvent($event,2)">mouse over</div>
+      <div class="box" v-on:mouseleave="handleEvent($event,2)">mouse leave</div>
+      <div class="box" @dblclick="handleEvent($event,2)">Double click</div>
+      <div class="box" @mousemove="handleMouseMove">x-{{x}} and y-{{y}}</div>
+      <br />
+      <br />
+      <a :href="url">github profile</a>
+
+      <!-- Books -->
+      <br />
+      <br />
+      <div>
+        <ul>
+          <li
+            v-for="book in favBooks"
+            :class="{fav:book.fav}"
+            @click="toggleFav(book)"
+          >
+            <img :src="book.img" :alt="book.name" />
+            <h2>{{book.name}}</h2>
+            <h2>Author - {{book.author}}</h2>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <br />
+
+    <script src="app.js"></script>
+  </body>
+</html>
